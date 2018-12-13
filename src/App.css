@@ -1,3 +1,10 @@
+body {
+  background: #222229;
+  font-size: 25px;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+}
+
 .game {
   display: inline-flex;
   flex-direction: column;
@@ -7,13 +14,15 @@
 }
 
 .target {
-  border: thin solid #999;
+  border: none;
+  border-radius: 25px;
   width: 40%;
   padding: 1% 0;
-  margin: 1% 0;
+  margin: 3% 0;
   text-align: center;
   font-size: 45px;
-  background: #ccc;
+  color: #272932;
+  background: #a6c0e7;
   display: inline-block;
 }
 
@@ -25,7 +34,10 @@
 
 .number {
   border: thin solid lightgray;
-  background: #eee;
+  background: #d3cecd;
+  color: #272932;
+  border-radius: 25px;
+  padding: 0.5% 0;
   width: 35%;
   font-size: 36px;
   text-align: center;
@@ -40,6 +52,27 @@
 }
 
 .timer-value {
-  color: darkgreen;
+  color: #4eb34e;
   font-size: 2rem;
+}
+
+button {
+  width: 200px;
+  height: 50px;
+  border: none;
+  background: #505461;
+  color: #ffc952;
+  border-radius: 25px;
+  margin-top: 7px;
+  font-size: 25px;
+  font-family: "Ubuntu", sans-serif;
+}
+
+button:hover {
+  cursor: pointer;
+  color: #f7e0ae;
+}
+
+button:focus {
+  outline: none;
 }

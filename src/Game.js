@@ -11,9 +11,9 @@ class Game extends Component {
   };
 
   static bgColors = {
-    playing: "#ccc",
-    won: "green",
-    lost: "red"
+    playing: "#a6c0e7",
+    won: "#76ca76",
+    lost: "#e95353"
   };
 
   challengeNumbers = Array.from({ length: this.props.challengeSize }).map(() =>
