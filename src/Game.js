@@ -5,7 +5,7 @@ import _ from "lodash";
 
 class Game extends Component {
   state = {
-    gameStatus: "new",
+    gameStatus: "won",
     remainingSeconds: this.props.initialSeconds,
     selectedIds: []
   };
@@ -25,6 +25,8 @@ class Game extends Component {
     this.props.challengeSize - 2
   ).reduce((acc, curr) => acc + curr);
 
+  isNumberAvailable = index => this.state.selectedIds.indexOf(index) === -1;
+
   render() {
     let { gameStatus, remainingSeconds } = this.state;
     return (
@@ -41,12 +43,22 @@ class Game extends Component {
         </div>
         <div className="challenge-numbers">
           {this.challengeNumbers.map((num, index) => (
-            <Number key={index} id={index} value={num} />
+            <Number
+              key={index}
+              id={index}
+              value={gameStatus === "new" ? "?" : num}
+              clickable={this.isNumberAvailable(index)}
+            />
           ))}
         </div>
         <div className="footer">
-          <div className="timer-value">{remainingSeconds}</div>
-          <button>Start</button>
+          {gameStatus === "new" ? (
+            <button>Start</button>
+          ) : (
+            <div className="timer-value">{remainingSeconds}</div>
+          )}
+
+          {["won", "lost"].includes(gameStatus) && <button>Play Again</button>}
         </div>
       </div>
     );

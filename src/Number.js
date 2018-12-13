@@ -2,7 +2,14 @@ import React, { Component } from "react";
 
 class Number extends Component {
   render() {
-    return <div className="number">{this.props.value}</div>;
+    return (
+      <div
+        className="number"
+        style={{ opacity: this.props.clickable ? 1 : 0.3 }}
+      >
+        {this.props.value}
+      </div>
+    );
   }
 }
 
