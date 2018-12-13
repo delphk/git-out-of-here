@@ -1,32 +1,42 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
+.game {
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.target {
+  border: thin solid #999;
+  width: 40%;
+  height: 75px;
+  text-align: center;
+  font-size: 45px;
+  background: #ccc;
+  display: inline-block;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.challenge-numbers {
+  width: 85%;
+  margin: 1rem auto;
+}
+
+.number {
+  border: thin solid lightgray;
+  background: #eee;
+  width: 40%;
+  font-size: 36px;
+  text-align: center;
+  margin: 1rem 5%;
+  display: inline-block;
+}
+
+.footer {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.timer-value {
+  color: darkgreen;
+  font-size: 2rem;
 }
