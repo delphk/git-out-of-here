@@ -5,7 +5,7 @@ import _ from "lodash";
 
 class Game extends Component {
   state = {
-    gameStatus: "won",
+    gameStatus: "new",
     remainingSeconds: this.props.initialSeconds,
     selectedIds: []
   };
@@ -26,6 +26,23 @@ class Game extends Component {
   ).reduce((acc, curr) => acc + curr);
 
   isNumberAvailable = index => this.state.selectedIds.indexOf(index) === -1;
+
+  startGame = () => {
+    this.setState({ gameStatus: "playing" }, () => {
+      this.intervalId = setInterval(this.countdown, 1000);
+    });
+  };
+
+  countdown = () => {
+    this.setState(prevState => {
+      const newRemainingSeconds = prevState.remainingSeconds - 1;
+      if (newRemainingSeconds === 0) {
+        clearInterval(this.intervalId);
+        return { gameStatus: "lost", remainingSeconds: 0 };
+      }
+      return { remainingSeconds: newRemainingSeconds };
+    });
+  };
 
   render() {
     let { gameStatus, remainingSeconds } = this.state;
@@ -53,7 +70,7 @@ class Game extends Component {
         </div>
         <div className="footer">
           {gameStatus === "new" ? (
-            <button>Start</button>
+            <button onClick={this.startGame}>Start</button>
           ) : (
             <div className="timer-value">{remainingSeconds}</div>
           )}
