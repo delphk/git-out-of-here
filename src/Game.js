@@ -27,6 +27,10 @@ class Game extends Component {
 
   isNumberAvailable = index => this.state.selectedIds.indexOf(index) === -1;
 
+  componentDidMount() {
+    if (this.props.autoPlay) this.startGame();
+  }
+
   startGame = () => {
     this.setState({ gameStatus: "playing" }, () => {
       this.intervalId = setInterval(this.countdown, 1000);
@@ -62,12 +66,16 @@ class Game extends Component {
       (acc, curr) => acc + this.challengeNumbers[curr],
       0
     );
-    console.log(sumSelected);
+    if (sumSelected < this.target && selectedIds.length === 4) return "lost";
     if (sumSelected < this.target) return "playing";
     return sumSelected === this.target && selectedIds.length === 4
       ? "won"
       : "lost";
   };
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
 
   render() {
     let { gameStatus, remainingSeconds } = this.state;
@@ -104,7 +112,9 @@ class Game extends Component {
           )}
 
           {["won", "lost"].includes(gameStatus) && (
-            <button className="play-again">Play Again</button>
+            <button className="play-again" onClick={this.props.onPlayAgain}>
+              Play Again
+            </button>
           )}
         </div>
       </div>
