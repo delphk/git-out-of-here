@@ -44,6 +44,31 @@ class Game extends Component {
     });
   };
 
+  selectNumber = numIndex => {
+    if (this.state.gameStatus !== "playing") return;
+    this.setState(
+      prevState => ({
+        selectedIds: [...prevState.selectedIds, numIndex],
+        gameStatus: this.calcGameStatus([...prevState.selectedIds, numIndex])
+      }),
+      () => {
+        if (this.state.gameStatus !== "playing") clearInterval(this.intervalId);
+      }
+    );
+  };
+
+  calcGameStatus = selectedIds => {
+    const sumSelected = selectedIds.reduce(
+      (acc, curr) => acc + this.challengeNumbers[curr],
+      0
+    );
+    console.log(sumSelected);
+    if (sumSelected < this.target) return "playing";
+    return sumSelected === this.target && selectedIds.length === 4
+      ? "won"
+      : "lost";
+  };
+
   render() {
     let { gameStatus, remainingSeconds } = this.state;
     return (
@@ -64,18 +89,23 @@ class Game extends Component {
               key={index}
               id={index}
               value={gameStatus === "new" ? "?" : num}
+              selectNumber={this.selectNumber}
               clickable={this.isNumberAvailable(index)}
             />
           ))}
         </div>
         <div className="footer">
           {gameStatus === "new" ? (
-            <button onClick={this.startGame}>Start</button>
+            <button className="start" onClick={this.startGame}>
+              Start
+            </button>
           ) : (
             <div className="timer-value">{remainingSeconds}</div>
           )}
 
-          {["won", "lost"].includes(gameStatus) && <button>Play Again</button>}
+          {["won", "lost"].includes(gameStatus) && (
+            <button className="play-again">Play Again</button>
+          )}
         </div>
       </div>
     );

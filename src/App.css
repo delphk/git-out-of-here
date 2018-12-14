@@ -56,7 +56,8 @@ body {
   font-size: 2rem;
 }
 
-button {
+.play-again,
+.start {
   width: 200px;
   height: 50px;
   border: none;
@@ -68,7 +69,8 @@ button {
   font-family: "Ubuntu", sans-serif;
 }
 
-button:hover {
+.play-again:hover,
+.start:hover {
   cursor: pointer;
   color: #f7e0ae;
 }
